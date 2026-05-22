@@ -7,87 +7,88 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#0a0f1e;--surface:#111827;--surface2:#1a2236;--border:rgba(255,255,255,.07);--border2:rgba(255,255,255,.13);--text:#f0eff4;--muted:#8b8a96;--accent:#0ea5e9;--accent-soft:rgba(14,165,233,.12);--accent-border:rgba(14,165,233,.35);--green:#10b981;--green-soft:rgba(16,185,129,.1);--amber:#f59e0b;--amber-soft:rgba(245,158,11,.1);--red:#f87171;--red-soft:rgba(248,113,113,.1);--purple:#a78bfa;--purple-soft:rgba(167,139,250,.1);--teal:#2dd4bf;--teal-soft:rgba(45,212,191,.1)}
+:root{--bg:#f0f6ff;--surface:#ffffff;--surface2:#e8f1fd;--border:rgba(0,90,200,.1);--border2:rgba(0,90,200,.2);--text:#1a2a4a;--muted:#6b7fa3;--accent:#1565c0;--accent-soft:rgba(21,101,192,.1);--accent-border:rgba(21,101,192,.3);--green:#0d7a4e;--green-soft:rgba(13,122,78,.08);--amber:#b45309;--amber-soft:rgba(180,83,9,.08);--red:#c0392b;--red-soft:rgba(192,57,43,.08);--purple:#5b21b6;--purple-soft:rgba(91,33,182,.08);--teal:#0e7490;--teal-soft:rgba(14,116,144,.08)}
 body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}
-header{border-bottom:1px solid var(--border);padding:16px 28px;display:flex;align-items:center;gap:14px;position:sticky;top:0;background:rgba(10,15,30,.94);backdrop-filter:blur(12px);z-index:100}
+header{border-bottom:2px solid #1565c0;padding:16px 28px;display:flex;align-items:center;gap:14px;position:sticky;top:0;background:#fff;z-index:100;box-shadow:0 2px 12px rgba(21,101,192,.1)}
 .logo{display:flex;align-items:center;gap:10px}
-.logo-mark{width:36px;height:36px;background:linear-gradient(135deg,#0ea5e9,#2dd4bf);border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:#fff;flex-shrink:0}
-.logo-text{font-size:15px;font-weight:700}
+.logo-mark{width:36px;height:36px;background:linear-gradient(135deg,#1565c0,#42a5f5);border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:#fff;flex-shrink:0}
+.logo-text{font-size:15px;font-weight:700;color:#1565c0}
 .logo-sub{font-size:11px;color:var(--muted)}
 .header-right{margin-left:auto;display:flex;gap:8px;align-items:center}
-.pill{font-size:11px;padding:3px 10px;border-radius:20px;border:1px solid var(--border2);color:var(--muted);font-family:'DM Mono',monospace}
+.pill{font-size:11px;padding:3px 10px;border-radius:20px;border:1px solid var(--accent-border);color:var(--accent);background:var(--accent-soft);font-family:'DM Mono',monospace}
 .layout{display:grid;grid-template-columns:220px 1fr;min-height:calc(100vh - 65px)}
-aside{border-right:1px solid var(--border);padding:20px 14px;position:sticky;top:65px;height:calc(100vh - 65px);overflow-y:auto}
+aside{border-right:1px solid var(--border2);padding:20px 14px;position:sticky;top:65px;height:calc(100vh - 65px);overflow-y:auto;background:#fff}
 .aside-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;padding:0 8px;margin-bottom:8px;margin-top:20px}
 .aside-label:first-child{margin-top:0}
 .filter-btn{display:flex;align-items:center;gap:8px;width:100%;padding:7px 10px;border-radius:8px;border:none;background:transparent;color:var(--muted);font-family:'Noto Sans KR',sans-serif;font-size:13px;cursor:pointer;text-align:left;transition:all .15s}
-.filter-btn:hover{background:var(--surface);color:var(--text)}
+.filter-btn:hover{background:var(--surface2);color:var(--text)}
 .filter-btn.active{background:var(--accent-soft);color:var(--accent);border:1px solid var(--accent-border)}
 .filter-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
 .filter-count{margin-left:auto;font-family:'DM Mono',monospace;font-size:11px;opacity:.6}
 .tag-cloud{display:flex;flex-wrap:wrap;gap:5px;padding:0 2px}
 .tag-chip{font-size:11px;padding:3px 9px;border-radius:20px;border:1px solid var(--border2);background:transparent;color:var(--muted);cursor:pointer;transition:all .15s;font-family:'Noto Sans KR',sans-serif}
-.tag-chip:hover{border-color:var(--accent-border);color:var(--accent)}
+.tag-chip:hover{border-color:var(--accent-border);color:var(--accent);background:var(--accent-soft)}
 .tag-chip.active{background:var(--accent-soft);border-color:var(--accent-border);color:var(--accent)}
 main{padding:24px 28px}
 .search-wrap{position:relative;margin-bottom:18px}
 .search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:16px;pointer-events:none}
-#search{width:100%;background:var(--surface);border:1px solid var(--border2);border-radius:10px;padding:11px 40px;color:var(--text);font-family:'Noto Sans KR',sans-serif;font-size:14px;outline:none;transition:border-color .15s}
+#search{width:100%;background:#fff;border:1.5px solid var(--border2);border-radius:10px;padding:11px 40px;color:var(--text);font-family:'Noto Sans KR',sans-serif;font-size:14px;outline:none;transition:border-color .15s;box-shadow:0 1px 4px rgba(21,101,192,.07)}
 #search::placeholder{color:var(--muted)}
-#search:focus{border-color:var(--accent-border)}
+#search:focus{border-color:#1565c0;box-shadow:0 0 0 3px rgba(21,101,192,.1)}
 .clear-btn{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--muted);cursor:pointer;font-size:16px;display:none}
 .results-meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
 .results-count{font-size:13px;color:var(--muted);font-family:'DM Mono',monospace}
-.results-count span{color:var(--text);font-weight:500}
+.results-count span{color:var(--accent);font-weight:700}
 .cards{display:flex;flex-direction:column;gap:10px}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px 20px;cursor:pointer;transition:all .18s;animation:fadeIn .2s ease}
+.card{background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:16px 20px;cursor:pointer;transition:all .18s;animation:fadeIn .2s ease;box-shadow:0 1px 4px rgba(21,101,192,.06)}
 @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-.card:hover{border-color:var(--border2);background:var(--surface2);transform:translateX(2px)}
+.card:hover{border-color:#1565c0;box-shadow:0 4px 16px rgba(21,101,192,.13);transform:translateY(-1px)}
 .card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:7px}
 .card-title{font-size:14px;font-weight:700;color:var(--text)}
-.badge{font-size:10px;font-family:'DM Mono',monospace;padding:3px 9px;border-radius:20px;flex-shrink:0;border:1px solid;white-space:nowrap}
-.badge-script{background:var(--green-soft);color:var(--green);border-color:rgba(16,185,129,.25)}
-.badge-product{background:var(--amber-soft);color:var(--amber);border-color:rgba(245,158,11,.25)}
-.badge-rule{background:var(--red-soft);color:var(--red);border-color:rgba(248,113,113,.25)}
-.badge-faq{background:var(--purple-soft);color:var(--purple);border-color:rgba(167,139,250,.25)}
-.badge-process{background:var(--teal-soft);color:var(--teal);border-color:rgba(45,212,191,.25)}
+.badge{font-size:10px;font-family:'DM Mono',monospace;padding:3px 9px;border-radius:20px;flex-shrink:0;border:1px solid;white-space:nowrap;font-weight:500}
+.badge-script{background:#e6f4ee;color:#0d7a4e;border-color:rgba(13,122,78,.25)}
+.badge-product{background:#fef3e2;color:#b45309;border-color:rgba(180,83,9,.25)}
+.badge-rule{background:#fdecea;color:#c0392b;border-color:rgba(192,57,43,.25)}
+.badge-faq{background:#ede9fb;color:#5b21b6;border-color:rgba(91,33,182,.25)}
+.badge-process{background:#e0f5f9;color:#0e7490;border-color:rgba(14,116,144,.25)}
 .card-desc{font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:12px}
 .card-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px}
-.ctag{font-size:11px;padding:2px 8px;border-radius:20px;background:rgba(255,255,255,.05);color:var(--muted);border:1px solid var(--border)}
+.ctag{font-size:11px;padding:2px 8px;border-radius:20px;background:var(--accent-soft);color:var(--accent);border:1px solid var(--accent-border)}
 .card-actions{display:flex;gap:8px}
-.btn{font-size:12px;font-family:'Noto Sans KR',sans-serif;padding:6px 13px;border-radius:7px;border:1px solid var(--border2);background:transparent;color:var(--muted);cursor:pointer;transition:all .15s}
-.btn:hover{background:var(--surface2);color:var(--text)}
-.btn-primary{background:var(--accent-soft);color:var(--accent);border-color:var(--accent-border)}
-.btn-primary:hover{background:var(--accent);color:#fff}
+.btn{font-size:12px;font-family:'Noto Sans KR',sans-serif;padding:6px 13px;border-radius:7px;border:1.5px solid var(--border2);background:transparent;color:var(--muted);cursor:pointer;transition:all .15s}
+.btn:hover{background:var(--surface2);color:var(--text);border-color:var(--accent)}
+.btn-primary{background:#1565c0;color:#fff;border-color:#1565c0}
+.btn-primary:hover{background:#1251a3;border-color:#1251a3;color:#fff}
 .empty{text-align:center;padding:60px 20px;color:var(--muted)}
 .empty-icon{font-size:32px;margin-bottom:10px;opacity:.4}
 .empty h3{font-size:15px;color:var(--text);margin-bottom:6px}
-.detail-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:200;backdrop-filter:blur(4px)}
+.detail-overlay{display:none;position:fixed;inset:0;background:rgba(21,101,192,.18);z-index:200;backdrop-filter:blur(4px)}
 .detail-overlay.open{display:flex;align-items:flex-start;justify-content:flex-end}
-.detail-panel{width:500px;max-width:100vw;height:100vh;background:var(--surface);border-left:1px solid var(--border2);overflow-y:auto;padding:28px;animation:slideIn .22s ease}
+.detail-panel{width:500px;max-width:100vw;height:100vh;background:#fff;border-left:2px solid #1565c0;overflow-y:auto;padding:28px;animation:slideIn .22s ease;box-shadow:-4px 0 24px rgba(21,101,192,.12)}
 @keyframes slideIn{from{transform:translateX(30px);opacity:0}to{transform:none;opacity:1}}
 .detail-close{background:none;border:none;color:var(--muted);font-size:18px;cursor:pointer;float:right;width:32px;height:32px;border-radius:6px;display:flex;align-items:center;justify-content:center;transition:all .15s}
 .detail-close:hover{background:var(--surface2);color:var(--text)}
 .detail-badge{display:inline-block;margin-bottom:12px;margin-top:4px}
-.detail-title{font-size:20px;font-weight:700;margin-bottom:8px;letter-spacing:-.4px;clear:both}
+.detail-title{font-size:20px;font-weight:700;margin-bottom:8px;letter-spacing:-.4px;clear:both;color:var(--accent)}
 .detail-desc{font-size:13px;color:var(--muted);margin-bottom:20px;line-height:1.7}
 .detail-section{margin-bottom:20px}
-.detail-section-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
-.script-block{background:var(--bg);border:1px solid var(--border2);border-radius:10px;padding:13px 15px;margin-bottom:8px}
-.script-role{font-size:10px;font-family:'DM Mono',monospace;color:var(--accent);margin-bottom:5px}
+.detail-section-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:10px;font-weight:700}
+.script-block{background:var(--bg);border:1.5px solid var(--border2);border-radius:10px;padding:13px 15px;margin-bottom:8px}
+.script-role{font-size:10px;font-family:'DM Mono',monospace;color:#1565c0;margin-bottom:5px;font-weight:700}
 .script-role.cust{color:var(--muted)}
 .script-text{font-size:13px;color:var(--text);line-height:1.75}
-.script-tip{font-size:12px;color:var(--muted);margin-top:8px;padding-top:8px;border-top:1px solid var(--border);font-style:italic}
+.script-tip{font-size:12px;color:#1565c0;margin-top:8px;padding-top:8px;border-top:1px solid var(--border2);font-style:italic}
 .detail-table{width:100%;border-collapse:collapse;font-size:13px}
-.detail-table th{text-align:left;padding:8px 10px;background:var(--bg);color:var(--muted);font-weight:500;font-size:11px;border-bottom:1px solid var(--border)}
+.detail-table th{text-align:left;padding:8px 10px;background:var(--accent-soft);color:var(--accent);font-weight:700;font-size:11px;border-bottom:2px solid var(--accent-border)}
 .detail-table td{padding:9px 10px;border-bottom:1px solid var(--border);color:var(--text)}
 .detail-table tr:last-child td{border-bottom:none}
-.rule-item{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--muted);padding:7px 0;border-bottom:1px solid var(--border)}
+.detail-table tr:hover td{background:var(--surface2)}
+.rule-item{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--muted);padding:8px 0;border-bottom:1px solid var(--border)}
 .rule-item:last-child{border-bottom:none}
 .rule-icon{font-size:14px;flex-shrink:0;margin-top:1px}
 ::-webkit-scrollbar{width:5px}
-::-webkit-scrollbar-track{background:transparent}
-::-webkit-scrollbar-thumb{background:var(--border2);border-radius:10px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--accent-border);border-radius:10px}
 </style>
 </head>
 <body>
@@ -104,12 +105,12 @@ main{padding:24px 28px}
 <div class="layout">
   <aside>
     <div class="aside-label">카테고리</div>
-    <button class="filter-btn active" data-filter="all" onclick="setFilter('all',this)"><span class="filter-dot" style="background:#8b8a96"></span>전체<span class="filter-count" id="fc-all">0</span></button>
-    <button class="filter-btn" data-filter="script" onclick="setFilter('script',this)"><span class="filter-dot" style="background:#10b981"></span>응대 스크립트<span class="filter-count" id="fc-script">0</span></button>
-    <button class="filter-btn" data-filter="product" onclick="setFilter('product',this)"><span class="filter-dot" style="background:#f59e0b"></span>상품 안내<span class="filter-count" id="fc-product">0</span></button>
-    <button class="filter-btn" data-filter="rule" onclick="setFilter('rule',this)"><span class="filter-dot" style="background:#f87171"></span>필수 규정<span class="filter-count" id="fc-rule">0</span></button>
-    <button class="filter-btn" data-filter="faq" onclick="setFilter('faq',this)"><span class="filter-dot" style="background:#a78bfa"></span>자주 묻는 질문<span class="filter-count" id="fc-faq">0</span></button>
-    <button class="filter-btn" data-filter="process" onclick="setFilter('process',this)"><span class="filter-dot" style="background:#2dd4bf"></span>계약 프로세스<span class="filter-count" id="fc-process">0</span></button>
+    <button class="filter-btn active" data-filter="all" onclick="setFilter('all',this)"><span class="filter-dot" style="background:#6b7fa3"></span>전체<span class="filter-count" id="fc-all">0</span></button>
+    <button class="filter-btn" data-filter="script" onclick="setFilter('script',this)"><span class="filter-dot" style="background:#0d7a4e"></span>응대 스크립트<span class="filter-count" id="fc-script">0</span></button>
+    <button class="filter-btn" data-filter="product" onclick="setFilter('product',this)"><span class="filter-dot" style="background:#b45309"></span>상품 안내<span class="filter-count" id="fc-product">0</span></button>
+    <button class="filter-btn" data-filter="rule" onclick="setFilter('rule',this)"><span class="filter-dot" style="background:#c0392b"></span>필수 규정<span class="filter-count" id="fc-rule">0</span></button>
+    <button class="filter-btn" data-filter="faq" onclick="setFilter('faq',this)"><span class="filter-dot" style="background:#5b21b6"></span>자주 묻는 질문<span class="filter-count" id="fc-faq">0</span></button>
+    <button class="filter-btn" data-filter="process" onclick="setFilter('process',this)"><span class="filter-dot" style="background:#0e7490"></span>계약 프로세스<span class="filter-count" id="fc-process">0</span></button>
     <div class="aside-label">태그</div>
     <div class="tag-cloud" id="tag-cloud"></div>
   </aside>
@@ -144,7 +145,7 @@ const DATA=[
 {id:11,type:'product',title:'상품 비교표 — 한눈에 보기',tags:['상품비교','동반차','믿음카','월렌트','6&12렌트'],desc:'동반차·믿음카·6&12렌트·월렌트의 이용 기간, 조건, 장점을 한눈에 비교합니다.',detail:{table:{headers:['상품','이용기간','승인기준','추천고객'],rows:[['동반차(선택/반납)','36~48개월','자체심사/무심사','신용 문제로 차량 마련 어려운 분'],['동반차(인수형)','48~60개월','자체심사','내 차를 갖고 싶은 분'],['믿음카','48개월','동반차 30개월+만기3개월미만','하모니 성실 이용 고객'],['6&12렌트','6 or 12개월','자체심사','장기계약 부담되는 분'],['월렌트','1개월','자체심사','출장·단기 대차 필요 고객']]}}},
 {id:12,type:'rule',title:'계약 전 필수 확인 사항',tags:['계약','면허','서류','블랙컨슈머'],desc:'계약 진행 전 반드시 확인해야 할 운전면허, 서류, 제한 사항 체크리스트입니다.',detail:{rules:[{icon:'🔴',text:'운전면허 발급 1년 미만이면 운전경력증명서 필수 제출'},{icon:'🔴',text:'음주 면허취소 2회 또는 면허정지 3회까지만 계약 가능. 무면허 1회라도 있으면 계약 불가'},{icon:'🔴',text:'블랙컨슈머로 등록된 고객은 계약 불가 — 바로시스템에서 반드시 확인'},{icon:'🔴',text:'법인 고객은 비대면 계약 불가 — 계약 전 반드시 확인'},{icon:'📋',text:'주민등록등본: 발급일 1개월 이내'},{icon:'📋',text:'본인인증 어려울 경우 최근 3개월 소득증빙서류 필요 (급여명세서, 통장내역)'},{icon:'⚠️',text:'기존 고객은 증차 제한이 있으므로 바로시스템 고객관리에서 반드시 조회 후 문의'}]}},
 {id:13,type:'rule',title:'연체 및 시동 제어 기준',tags:['연체','시동제어','차량회수','미납'],desc:'상품별로 연체 시 시동 제어 및 차량 회수 기준이 다릅니다. 고객에게 반드시 안내하세요.',detail:{table:{headers:['상품','시동 제어','차량 회수'],rows:[['동반차(구입형)','없음','대여료 2회 미납 시 즉시'],['동반차(선택형/리스)','연체 9일 유예 후 10일차 오전10시','대여료 2회 미납 시'],['믿음카 렌트/리스','없음','대여료 1회 미납 시'],['6&12렌트/무보증','연체 3일 유예 후 4일차 오전10시','연체 7일차 계약 해지'],['월렌트','연체 즉시','연체 즉시']]},rules:[{icon:'⚠️',text:'동반차·믿음카·6&12렌트는 31일(말일) 출고 시 결제일은 30일(전일)'},{icon:'⚠️',text:'차량 법정 검사 미이행/거부/연락두절 시 수일 내 시동 제어'}]}},
-{id:14,type:'rule',title:'중도 해지 위약금 기준',tags:['중도해지','위약금','해지','승계'],desc:'계약 기간을 다 채우지 못하고 해지할 경우 발생하는 위약금 산정 방식입니다.',detail:{table:{headers:['상품','만기처리방식','위약금 산정'],rows:[['동반차/동반차리스/6&12렌트','반납·선택형','잔여기간 총 대여료 × 30%'],['동반차(인수형) 48개월 1~23회차','인수형','차량가액 × 25%'],['동반차(인수형) 48개월 24~35회차','인수형','차량가액 × 20%'],['동반차(인수형) 48개월 36~47회차','인수형','차량가액 × 15%'],['월렌트','중도반납','남은 기간 대여료 환급 없음']]},rules:[{icon:'💡',text:'중도 해지 시 승계를 이용하면 위약금을 피할 수 있습니다'},{icon:'📋',text:'승계 조건: 계약 시작 6개월 경과 + 만기 3개월 이전인 경우'}]}},
+{id:14,type:'rule',title:'중도 해지 위약금 기준',tags:['중도해지','위약금','해지','승계'],desc:'계약 기간을 다 채우지 못하고 해지할 경우 발생하는 위약금 산정 방식입니다.',detail:{table:{headers:['상품','만기처리방식','위약금 산정'],rows:[['동반차/동반차리스/6&12렌트','반납·선택형','잔여기간 총 대여료 × 30%'],['동반차(인수형) 1~23회차','인수형','차량가액 × 25%'],['동반차(인수형) 24~35회차','인수형','차량가액 × 20%'],['동반차(인수형) 36~47회차','인수형','차량가액 × 15%'],['월렌트','중도반납','남은 기간 대여료 환급 없음']]},rules:[{icon:'💡',text:'중도 해지 시 승계를 이용하면 위약금을 피할 수 있습니다'},{icon:'📋',text:'승계 조건: 계약 시작 6개월 경과 + 만기 3개월 이전인 경우'}]}},
 {id:15,type:'rule',title:'운전자 범위 & 약정 주행거리',tags:['운전자범위','주행거리','초과운행','공동임차인'],desc:'누가 운전할 수 있는지, 주행거리 초과 시 요금은 얼마인지 안내합니다.',detail:{table:{headers:['대상','운전자 범위'],rows:[['개인','계약자 및 직계가족, 법적 배우자 (사실혼 제외)'],['개인사업자','계약자, 직계가족, 법적 배우자, 임직원'],['법인','대표자 및 4대보험 가입된 임직원']]},rules:[{icon:'📋',text:'공통: 만 26세~만 69세 이하, 운전면허 취득 1년 이상 (추가 금액 납입 시 만 23세 이상 가능)'},{icon:'📋',text:'약정 주행거리: 동반차·믿음카 기준 6개월 15,000km / 1년 30,000km'},{icon:'💰',text:'초과 운행료: 차량가 2,000만원 미만 1km당 100원 / 2,000~5,000만원 200원 / 5,000만원 이상 300원'},{icon:'⚠️',text:'지정 외 제3자 운행 중 사고 시 보험 적용 불가 + 즉각 계약 해지 및 차량 회수'},{icon:'📋',text:'공동임차인 추가는 1명만 가능, 계약 기간 내 1회만 변경 가능'}]}},
 {id:16,type:'rule',title:'보험 범위 & 사고 대처',tags:['보험','사고','면책금','4대중과실'],desc:'상품별 보험 보상 한도, 자차 면책금, 4대 중과실 기준을 안내합니다.',detail:{table:{headers:['상품','보상 한도','자차 면책금','대인/대물 면책금'],rows:[['동반차(구입/선택)/믿음카렌트','대인 무한, 대물 1억, 자손 1억, 부상 1,500만','수리비 30% (최소30만~최대100만)','고객 과실 50% 이상 시 최소10~최대50만원'],['동반차리스/믿음카리스/6&12/월렌트','상동','상동','피해 항목별 자부담 10만원']]},rules:[{icon:'🔴',text:'4대 중과실(무면허·음주·중앙선침범·신호위반) 사고 시 보험 적용 불가 + 계약 해지'},{icon:'⚠️',text:'12대 중과실 사고 시 자기부담금 외 수리비 20% 추가 발생'},{icon:'📞',text:'사고 접수: 1661-7977 (리스 상품은 1544-0114)'},{icon:'📋',text:'사고 대차 서비스는 제공되지 않습니다'},{icon:'📋',text:'긴급출동 무상 횟수: KB 10회 / 렌터카공제 5회'}]}},
 {id:17,type:'rule',title:'탁송 안내',tags:['탁송','출고','인수','탁송비'],desc:'차량 탁송 출발지, 탁송비 부담 기준, 인수 시 주의사항을 안내합니다.',detail:{rules:[{icon:'📍',text:'신차 출발지: 경기도 평택 (탁송 신청 마감: 전일 오후 3시)'},{icon:'📍',text:'중고차 출발지: 경기도 화성 또는 삼송 (탁송 신청 마감: 전일 오후 4시)'},{icon:'✅',text:'동반차·믿음카(인수형/리스): 집 앞까지 무료 (제주도는 목포까지만 무료)'},{icon:'💰',text:'6&12렌트·월렌트: 탁송비 고객 부담'},{icon:'💰',text:'무보증 상품 또는 보증금 카드 결제 시: 탁송비 고객 부담'},{icon:'⚠️',text:'차량 인수는 계약자 본인만 가능 (제3자 인수 불가)'},{icon:'⚠️',text:'탁송 당일 주소/수령인 변경 불가 — 미리 확인 필수'},{icon:'📋',text:'차량 키는 1개만 지급 (비상키는 회사 보관)'}]}},
