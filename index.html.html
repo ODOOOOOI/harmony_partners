@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>하모니렌트카 영업 지식베이스</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0f1e;--surface:#111827;--surface2:#1a2236;--border:rgba(255,255,255,.07);--border2:rgba(255,255,255,.13);--text:#f0eff4;--muted:#8b8a96;--accent:#0ea5e9;--accent-soft:rgba(14,165,233,.12);--accent-border:rgba(14,165,233,.35);--green:#10b981;--green-soft:rgba(16,185,129,.1);--amber:#f59e0b;--amber-soft:rgba(245,158,11,.1);--red:#f87171;--red-soft:rgba(248,113,113,.1);--purple:#a78bfa;--purple-soft:rgba(167,139,250,.1);--teal:#2dd4bf;--teal-soft:rgba(45,212,191,.1)}
+body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}
+header{border-bottom:1px solid var(--border);padding:16px 28px;display:flex;align-items:center;gap:14px;position:sticky;top:0;background:rgba(10,15,30,.94);backdrop-filter:blur(12px);z-index:100}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-mark{width:36px;height:36px;background:linear-gradient(135deg,#0ea5e9,#2dd4bf);border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:#fff;flex-shrink:0}
+.logo-text{font-size:15px;font-weight:700}
+.logo-sub{font-size:11px;color:var(--muted)}
+.header-right{margin-left:auto;display:flex;gap:8px;align-items:center}
+.pill{font-size:11px;padding:3px 10px;border-radius:20px;border:1px solid var(--border2);color:var(--muted);font-family:'DM Mono',monospace}
+.layout{display:grid;grid-template-columns:220px 1fr;min-height:calc(100vh - 65px)}
+aside{border-right:1px solid var(--border);padding:20px 14px;position:sticky;top:65px;height:calc(100vh - 65px);overflow-y:auto}
+.aside-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;padding:0 8px;margin-bottom:8px;margin-top:20px}
+.aside-label:first-child{margin-top:0}
+.filter-btn{display:flex;align-items:center;gap:8px;width:100%;padding:7px 10px;border-radius:8px;border:none;background:transparent;color:var(--muted);font-family:'Noto Sans KR',sans-serif;font-size:13px;cursor:pointer;text-align:left;transition:all .15s}
+.filter-btn:hover{background:var(--surface);color:var(--text)}
+.filter-btn.active{background:var(--accent-soft);color:var(--accent);border:1px solid var(--accent-border)}
+.filter-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.filter-count{margin-left:auto;font-family:'DM Mono',monospace;font-size:11px;opacity:.6}
+.tag-cloud{display:flex;flex-wrap:wrap;gap:5px;padding:0 2px}
+.tag-chip{font-size:11px;padding:3px 9px;border-radius:20px;border:1px solid var(--border2);background:transparent;color:var(--muted);cursor:pointer;transition:all .15s;font-family:'Noto Sans KR',sans-serif}
+.tag-chip:hover{border-color:var(--accent-border);color:var(--accent)}
+.tag-chip.active{background:var(--accent-soft);border-color:var(--accent-border);color:var(--accent)}
+main{padding:24px 28px}
+.search-wrap{position:relative;margin-bottom:18px}
+.search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:16px;pointer-events:none}
+#search{width:100%;background:var(--surface);border:1px solid var(--border2);border-radius:10px;padding:11px 40px;color:var(--text);font-family:'Noto Sans KR',sans-serif;font-size:14px;outline:none;transition:border-color .15s}
+#search::placeholder{color:var(--muted)}
+#search:focus{border-color:var(--accent-border)}
+.clear-btn{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--muted);cursor:pointer;font-size:16px;display:none}
+.results-meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.results-count{font-size:13px;color:var(--muted);font-family:'DM Mono',monospace}
+.results-count span{color:var(--text);font-weight:500}
+.cards{display:flex;flex-direction:column;gap:10px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px 20px;cursor:pointer;transition:all .18s;animation:fadeIn .2s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.card:hover{border-color:var(--border2);background:var(--surface2);transform:translateX(2px)}
+.card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:7px}
+.card-title{font-size:14px;font-weight:700;color:var(--text)}
+.badge{font-size:10px;font-family:'DM Mono',monospace;padding:3px 9px;border-radius:20px;flex-shrink:0;border:1px solid;white-space:nowrap}
+.badge-script{background:var(--green-soft);color:var(--green);border-color:rgba(16,185,129,.25)}
+.badge-product{background:var(--amber-soft);color:var(--amber);border-color:rgba(245,158,11,.25)}
+.badge-rule{background:var(--red-soft);color:var(--red);border-color:rgba(248,113,113,.25)}
+.badge-faq{background:var(--purple-soft);color:var(--purple);border-color:rgba(167,139,250,.25)}
+.badge-process{background:var(--teal-soft);color:var(--teal);border-color:rgba(45,212,191,.25)}
+.card-desc{font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:12px}
+.card-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px}
+.ctag{font-size:11px;padding:2px 8px;border-radius:20px;background:rgba(255,255,255,.05);color:var(--muted);border:1px solid var(--border)}
+.card-actions{display:flex;gap:8px}
+.btn{font-size:12px;font-family:'Noto Sans KR',sans-serif;padding:6px 13px;border-radius:7px;border:1px solid var(--border2);background:transparent;color:var(--muted);cursor:pointer;transition:all .15s}
+.btn:hover{background:var(--surface2);color:var(--text)}
+.btn-primary{background:var(--accent-soft);color:var(--accent);border-color:var(--accent-border)}
+.btn-primary:hover{background:var(--accent);color:#fff}
+.empty{text-align:center;padding:60px 20px;color:var(--muted)}
+.empty-icon{font-size:32px;margin-bottom:10px;opacity:.4}
+.empty h3{font-size:15px;color:var(--text);margin-bottom:6px}
+.detail-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:200;backdrop-filter:blur(4px)}
+.detail-overlay.open{display:flex;align-items:flex-start;justify-content:flex-end}
+.detail-panel{width:500px;max-width:100vw;height:100vh;background:var(--surface);border-left:1px solid var(--border2);overflow-y:auto;padding:28px;animation:slideIn .22s ease}
+@keyframes slideIn{from{transform:translateX(30px);opacity:0}to{transform:none;opacity:1}}
+.detail-close{background:none;border:none;color:var(--muted);font-size:18px;cursor:pointer;float:right;width:32px;height:32px;border-radius:6px;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.detail-close:hover{background:var(--surface2);color:var(--text)}
+.detail-badge{display:inline-block;margin-bottom:12px;margin-top:4px}
+.detail-title{font-size:20px;font-weight:700;margin-bottom:8px;letter-spacing:-.4px;clear:both}
+.detail-desc{font-size:13px;color:var(--muted);margin-bottom:20px;line-height:1.7}
+.detail-section{margin-bottom:20px}
+.detail-section-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.script-block{background:var(--bg);border:1px solid var(--border2);border-radius:10px;padding:13px 15px;margin-bottom:8px}
+.script-role{font-size:10px;font-family:'DM Mono',monospace;color:var(--accent);margin-bottom:5px}
+.script-role.cust{color:var(--muted)}
+.script-text{font-size:13px;color:var(--text);line-height:1.75}
+.script-tip{font-size:12px;color:var(--muted);margin-top:8px;padding-top:8px;border-top:1px solid var(--border);font-style:italic}
+.detail-table{width:100%;border-collapse:collapse;font-size:13px}
+.detail-table th{text-align:left;padding:8px 10px;background:var(--bg);color:var(--muted);font-weight:500;font-size:11px;border-bottom:1px solid var(--border)}
+.detail-table td{padding:9px 10px;border-bottom:1px solid var(--border);color:var(--text)}
+.detail-table tr:last-child td{border-bottom:none}
+.rule-item{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--muted);padding:7px 0;border-bottom:1px solid var(--border)}
+.rule-item:last-child{border-bottom:none}
+.rule-icon{font-size:14px;flex-shrink:0;margin-top:1px}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:10px}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">
+    <div class="logo-mark">HR</div>
+    <div>
+      <div class="logo-text">하모니렌트카 영업 지식베이스</div>
+      <div class="logo-sub">Sales Knowledge Base 2026</div>
+    </div>
+  </div>
+  <div class="header-right"><div class="pill" id="total-count">-- items</div></div>
+</header>
+<div class="layout">
+  <aside>
+    <div class="aside-label">카테고리</div>
+    <button class="filter-btn active" data-filter="all" onclick="setFilter('all',this)"><span class="filter-dot" style="background:#8b8a96"></span>전체<span class="filter-count" id="fc-all">0</span></button>
+    <button class="filter-btn" data-filter="script" onclick="setFilter('script',this)"><span class="filter-dot" style="background:#10b981"></span>응대 스크립트<span class="filter-count" id="fc-script">0</span></button>
+    <button class="filter-btn" data-filter="product" onclick="setFilter('product',this)"><span class="filter-dot" style="background:#f59e0b"></span>상품 안내<span class="filter-count" id="fc-product">0</span></button>
+    <button class="filter-btn" data-filter="rule" onclick="setFilter('rule',this)"><span class="filter-dot" style="background:#f87171"></span>필수 규정<span class="filter-count" id="fc-rule">0</span></button>
+    <button class="filter-btn" data-filter="faq" onclick="setFilter('faq',this)"><span class="filter-dot" style="background:#a78bfa"></span>자주 묻는 질문<span class="filter-count" id="fc-faq">0</span></button>
+    <button class="filter-btn" data-filter="process" onclick="setFilter('process',this)"><span class="filter-dot" style="background:#2dd4bf"></span>계약 프로세스<span class="filter-count" id="fc-process">0</span></button>
+    <div class="aside-label">태그</div>
+    <div class="tag-cloud" id="tag-cloud"></div>
+  </aside>
+  <main>
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input id="search" type="text" placeholder="키워드 검색 (예: 동반차, 사고, 해피콜, 위약금...)" oninput="render()">
+      <button class="clear-btn" id="clear-btn" onclick="clearSearch()">✕</button>
+    </div>
+    <div class="results-meta"><div class="results-count" id="results-count"><span>0</span>개 항목</div></div>
+    <div class="cards" id="cards"></div>
+  </main>
+</div>
+<div class="detail-overlay" id="overlay" onclick="closeDetail(event)">
+  <div class="detail-panel" id="detail-panel">
+    <button class="detail-close" onclick="closeDetailBtn()">✕</button>
+    <div id="detail-content"></div>
+  </div>
+</div>
+<script>
+const DATA=[
+{id:1,type:'script',title:'첫 인사 & 소개 스크립트',tags:['인사','첫통화','신규','콜드콜'],desc:'처음 연락하는 고객에게 하모니렌트카를 자연스럽게 소개하는 표준 스크립트입니다.',detail:{scenarios:[{label:'콜드콜 — 처음 연락',scripts:[{role:'rep',text:'"안녕하세요, 하모니렌트카의 [이름]입니다. 갑자기 연락드려서 실례가 됐다면 죄송합니다. 혹시 지금 잠깐 말씀 나눌 수 있을까요?"',tip:'짧게 시작. 시간을 먼저 묻는 게 핵심입니다.'},{role:'cust',text:'"네, 잠깐은 괜찮아요."'},{role:'rep',text:'"저희 하모니렌트카는 신용 문제로 차량 마련이 어려우신 분들도 자체 심사 기준으로 승인을 진행하고 있어요. 혹시 현재 차량 이용하고 계신가요?"',tip:'우리 상품의 차별점(신용 심사 유연)을 자연스럽게 녹이세요.'}]},{label:'통화 불가 시 대응',scripts:[{role:'cust',text:'"지금 바빠서요."'},{role:'rep',text:'"아, 바쁘신 거 충분히 이해합니다. 그럼 언제쯤 다시 연락드리면 될까요? 5분이면 충분합니다."',tip:'거절당해도 다음 약속을 잡는 것으로 마무리하세요.'}]}]}},
+{id:2,type:'script',title:'렌트 vs 리스 vs 할부 설명 스크립트',tags:['렌트','리스','할부','비교','설명'],desc:'고객이 세 가지 방식의 차이를 헷갈려할 때 쉽게 설명하는 스크립트입니다.',detail:{scenarios:[{label:'"렌트랑 리스가 뭐가 달라요?"',scripts:[{role:'cust',text:'"렌트랑 리스가 뭐가 다른 거예요?"'},{role:'rep',text:'"쉽게 설명드리면요, 렌트는 영업용 번호판(하·허·호)을 달고 보험이 렌트료에 포함돼 있어요. 반면 리스는 자가용 번호판이고 보험을 따로 가입하셔야 해요. 사고 나셔도 렌트는 보험료 인상이 없다는 게 큰 장점이에요."',tip:'보험료 할증 없음이 가장 강력한 렌트의 셀링 포인트입니다.'},{role:'cust',text:'"할부는요?"'},{role:'rep',text:'"할부는 차량이 고객님 명의가 되지만 대출로 잡혀서 신용도에 영향이 가요. 렌트는 빌려타는 방식이라 대출로 잡히지 않아서 나중에 집 살 때도 대출 한도를 아낄 수 있어요."',tip:'신용점수 보호 포인트를 꼭 언급하세요.'}]}]}},
+{id:3,type:'script',title:'장기렌트 장점 설명 스크립트',tags:['장기렌트','장점','절세','보험할증','신용'],desc:'장기렌트의 핵심 장점 6가지를 고객 눈높이에 맞게 설명하는 스크립트입니다.',detail:{scenarios:[{label:'"왜 렌트가 유리한가요?"',scripts:[{role:'rep',text:'"첫째, 초기 비용이 없어요. 취득세·자동차세·보험료가 모두 월 렌트료에 포함돼 있어서 목돈 없이 시작할 수 있어요."',tip:''},{role:'rep',text:'"둘째, 사고 나셔도 렌트료가 절대 오르지 않아요. 보험료 할증 걱정이 없으세요."',tip:'초보 운전자에게 매우 강력한 포인트입니다.'},{role:'rep',text:'"셋째, 대출로 잡히지 않아 신용점수에 영향이 없어요. 나중에 집 살 때 대출 한도가 유지됩니다."',tip:''},{role:'rep',text:'"개인사업자나 법인이시라면 월 렌트료 전체가 비용 처리돼서 세금도 절약하실 수 있어요."',tip:'절세 효과는 사업자 고객에게 매우 강력한 포인트입니다.'}]}]}},
+{id:4,type:'script',title:'클레임 응대 스크립트',tags:['클레임','불만','민원','사고'],desc:'불만 고객을 진정시키고 해결책을 제시하는 단계별 응대 흐름입니다.',detail:{scenarios:[{label:'강한 불만 고객 응대',scripts:[{role:'cust',text:'"이게 말이 됩니까! 차에 문제가 있잖아요!"'},{role:'rep',text:'"많이 불편하셨겠습니다. 먼저 진심으로 사과드립니다. 정확히 어떤 문제가 발생했는지 말씀해 주시면 바로 해결 방법을 찾아드리겠습니다."',tip:'먼저 공감, 그 다음 해결. 절대 변명하지 마세요.'},{role:'rep',text:'"하모니 지정 공업사로 바로 연결해 드릴게요. 사고 접수는 1661-7977로 해주시면 됩니다."',tip:'해결책을 구체적으로 제시하고 빠른 조치를 약속하세요.'}]}]}},
+{id:5,type:'script',title:'거절 고객 대응 스크립트',tags:['거절','반박','고민중','재연락','경쟁사'],desc:'고객이 구매를 거절하거나 망설일 때 대응하는 멘트 모음입니다.',detail:{scenarios:[{label:'"지금 당장은 필요 없어요"',scripts:[{role:'cust',text:'"지금 당장은 필요 없어요."'},{role:'rep',text:'"네, 충분히 이해합니다. 혹시 언제쯤 필요하실 것 같으세요? 그때 맞춰서 다시 연락드려도 될까요?"',tip:'거절을 미래 기회로 전환하세요.'}]},{label:'"다른 곳이랑 비교해볼게요"',scripts:[{role:'cust',text:'"다른 렌트사랑 비교해볼게요."'},{role:'rep',text:'"물론이죠. 다만 저희 하모니만의 가장 큰 차이는 신용 심사 기준이 훨씬 유연하다는 점이에요. 타사에서 거절당하셨던 분들도 저희에서 승인되는 경우가 많아요."',tip:'경쟁사와 차별화되는 하모니의 핵심 포인트를 강조하세요.'}]}]}},
+{id:6,type:'script',title:'해피콜 사전 설명 스크립트',tags:['해피콜','계약','사전설명','녹취'],desc:'계약 전 고객에게 해피콜 절차를 미리 설명하는 스크립트입니다.',detail:{scenarios:[{label:'해피콜 사전 안내',scripts:[{role:'rep',text:'"계약이 완료되면 본사(02-1588-5802)에서 해피콜 전화가 오는데요, 반드시 받아주셔야 차량 출고가 진행됩니다."',tip:'고객이 해피콜을 못 받으면 출고가 지연됩니다. 꼭 강조하세요.'},{role:'rep',text:'"해피콜에서 운전자 범위, 약정 주행거리, 하이링크 단말기, 중도해지 위약금 같은 핵심 내용을 확인하실 거예요. 제가 미리 설명드린 내용들이라 편하게 답해주시면 됩니다."',tip:'사전 설명을 충분히 해두어야 해피콜에서 고객이 당황하지 않습니다.'}]}]}},
+{id:7,type:'product',title:'동반차 — 선택형 vs 인수형',tags:['동반차','선택형','인수형','저신용','신용불량'],desc:'저신용·신용불량 고객도 이용 가능한 하모니의 대표 상품. 선택형과 인수형으로 나뉩니다.',detail:{table:{headers:['구분','동반차 선택형','동반차 인수형'],rows:[['계약기간','36~48개월','48~60개월'],['만기 처리','반납 또는 인수 선택','자동으로 고객 명의 이전'],['특징','감가 걱정 없이 반납 가능','사실상 할부로 차 사는 것과 동일'],['추천 고객','일단 타보고 결정하고 싶은 분','내 차를 갖고 싶지만 금융권 불가한 분']]},rules:[{icon:'✅',text:'하모니 자체 심사 또는 무심사로 타사 거절 이력 있어도 승인 가능'},{icon:'✅',text:'인수형은 인수금 0원으로 계약 종료 후 바로 내 차가 됩니다'},{icon:'⚠️',text:'동반차 31일(말일) 출고 시 결제일은 30일(전일)로 지정됩니다'}]}},
+{id:8,type:'product',title:'믿음카 — 성실 납부 고객 전용',tags:['믿음카','재계약','만기고객','할인'],desc:'동반차를 30개월 이상 성실 납부한 고객에게 제공되는 특별 혜택 상품입니다.',detail:{rules:[{icon:'✅',text:'이용 조건: 동반차 30개월 이상 이용 + 만기 3개월 미만'},{icon:'✅',text:'납부 이력 기준으로 렌트료 할인 혜택 제공'},{icon:'✅',text:'재이용 고객 전용 확보 물량 및 빠른 출고 우선권'},{icon:'✅',text:'복잡한 재심사 없이 기존 신뢰 관계 기반으로 간편 진행'},{icon:'⚠️',text:'남은 계약 기간에 대한 위약금이 없는 고객만 이용 가능'}]}},
+{id:9,type:'product',title:'6&12렌트 — 단기 유연 계약',tags:['6&12렌트','단기','위약금','유연'],desc:'6개월 또는 12개월 단위 계약으로 위약금 부담을 획기적으로 줄인 상품입니다.',detail:{rules:[{icon:'✅',text:'계약 기간이 짧아 중도 해지 위약금 부담이 낮습니다'},{icon:'✅',text:'저신용자도 이용 가능한 하모니 자체 심사 기준 동일 적용'},{icon:'✅',text:'신차 출고 대기 기간 동안 임시로 이용하기 좋습니다'},{icon:'⚠️',text:'연체 시 결제일로부터 3일 유예 후 4일차 오전 10시 시동 제어'},{icon:'⚠️',text:'탁송비는 고객 부담입니다 (동반차·믿음카는 무료)'}]}},
+{id:10,type:'product',title:'월렌트 — 초단기 1~2개월',tags:['월렌트','초단기','출장','대차'],desc:'최소 6개월 약정조차 부담스러운 상황에서 1~2개월 단위로 이용하는 초단기 상품입니다.',detail:{rules:[{icon:'✅',text:'신차 계약 후 차량 출고 대기 중인 분께 추천'},{icon:'✅',text:'출장·파견 등 단기간만 차량이 필요한 분께 추천'},{icon:'📋',text:'약정 주행거리 월 3,000km'},{icon:'⚠️',text:'연체 즉시 시동 제어 및 차량 회수'},{icon:'⚠️',text:'계약 기간 중 반납 시 남은 기간 대여료 환급 없음'}]}},
+{id:11,type:'product',title:'상품 비교표 — 한눈에 보기',tags:['상품비교','동반차','믿음카','월렌트','6&12렌트'],desc:'동반차·믿음카·6&12렌트·월렌트의 이용 기간, 조건, 장점을 한눈에 비교합니다.',detail:{table:{headers:['상품','이용기간','승인기준','추천고객'],rows:[['동반차(선택/반납)','36~48개월','자체심사/무심사','신용 문제로 차량 마련 어려운 분'],['동반차(인수형)','48~60개월','자체심사','내 차를 갖고 싶은 분'],['믿음카','48개월','동반차 30개월+만기3개월미만','하모니 성실 이용 고객'],['6&12렌트','6 or 12개월','자체심사','장기계약 부담되는 분'],['월렌트','1개월','자체심사','출장·단기 대차 필요 고객']]}}},
+{id:12,type:'rule',title:'계약 전 필수 확인 사항',tags:['계약','면허','서류','블랙컨슈머'],desc:'계약 진행 전 반드시 확인해야 할 운전면허, 서류, 제한 사항 체크리스트입니다.',detail:{rules:[{icon:'🔴',text:'운전면허 발급 1년 미만이면 운전경력증명서 필수 제출'},{icon:'🔴',text:'음주 면허취소 2회 또는 면허정지 3회까지만 계약 가능. 무면허 1회라도 있으면 계약 불가'},{icon:'🔴',text:'블랙컨슈머로 등록된 고객은 계약 불가 — 바로시스템에서 반드시 확인'},{icon:'🔴',text:'법인 고객은 비대면 계약 불가 — 계약 전 반드시 확인'},{icon:'📋',text:'주민등록등본: 발급일 1개월 이내'},{icon:'📋',text:'본인인증 어려울 경우 최근 3개월 소득증빙서류 필요 (급여명세서, 통장내역)'},{icon:'⚠️',text:'기존 고객은 증차 제한이 있으므로 바로시스템 고객관리에서 반드시 조회 후 문의'}]}},
+{id:13,type:'rule',title:'연체 및 시동 제어 기준',tags:['연체','시동제어','차량회수','미납'],desc:'상품별로 연체 시 시동 제어 및 차량 회수 기준이 다릅니다. 고객에게 반드시 안내하세요.',detail:{table:{headers:['상품','시동 제어','차량 회수'],rows:[['동반차(구입형)','없음','대여료 2회 미납 시 즉시'],['동반차(선택형/리스)','연체 9일 유예 후 10일차 오전10시','대여료 2회 미납 시'],['믿음카 렌트/리스','없음','대여료 1회 미납 시'],['6&12렌트/무보증','연체 3일 유예 후 4일차 오전10시','연체 7일차 계약 해지'],['월렌트','연체 즉시','연체 즉시']]},rules:[{icon:'⚠️',text:'동반차·믿음카·6&12렌트는 31일(말일) 출고 시 결제일은 30일(전일)'},{icon:'⚠️',text:'차량 법정 검사 미이행/거부/연락두절 시 수일 내 시동 제어'}]}},
+{id:14,type:'rule',title:'중도 해지 위약금 기준',tags:['중도해지','위약금','해지','승계'],desc:'계약 기간을 다 채우지 못하고 해지할 경우 발생하는 위약금 산정 방식입니다.',detail:{table:{headers:['상품','만기처리방식','위약금 산정'],rows:[['동반차/동반차리스/6&12렌트','반납·선택형','잔여기간 총 대여료 × 30%'],['동반차(인수형) 48개월 1~23회차','인수형','차량가액 × 25%'],['동반차(인수형) 48개월 24~35회차','인수형','차량가액 × 20%'],['동반차(인수형) 48개월 36~47회차','인수형','차량가액 × 15%'],['월렌트','중도반납','남은 기간 대여료 환급 없음']]},rules:[{icon:'💡',text:'중도 해지 시 승계를 이용하면 위약금을 피할 수 있습니다'},{icon:'📋',text:'승계 조건: 계약 시작 6개월 경과 + 만기 3개월 이전인 경우'}]}},
+{id:15,type:'rule',title:'운전자 범위 & 약정 주행거리',tags:['운전자범위','주행거리','초과운행','공동임차인'],desc:'누가 운전할 수 있는지, 주행거리 초과 시 요금은 얼마인지 안내합니다.',detail:{table:{headers:['대상','운전자 범위'],rows:[['개인','계약자 및 직계가족, 법적 배우자 (사실혼 제외)'],['개인사업자','계약자, 직계가족, 법적 배우자, 임직원'],['법인','대표자 및 4대보험 가입된 임직원']]},rules:[{icon:'📋',text:'공통: 만 26세~만 69세 이하, 운전면허 취득 1년 이상 (추가 금액 납입 시 만 23세 이상 가능)'},{icon:'📋',text:'약정 주행거리: 동반차·믿음카 기준 6개월 15,000km / 1년 30,000km'},{icon:'💰',text:'초과 운행료: 차량가 2,000만원 미만 1km당 100원 / 2,000~5,000만원 200원 / 5,000만원 이상 300원'},{icon:'⚠️',text:'지정 외 제3자 운행 중 사고 시 보험 적용 불가 + 즉각 계약 해지 및 차량 회수'},{icon:'📋',text:'공동임차인 추가는 1명만 가능, 계약 기간 내 1회만 변경 가능'}]}},
+{id:16,type:'rule',title:'보험 범위 & 사고 대처',tags:['보험','사고','면책금','4대중과실'],desc:'상품별 보험 보상 한도, 자차 면책금, 4대 중과실 기준을 안내합니다.',detail:{table:{headers:['상품','보상 한도','자차 면책금','대인/대물 면책금'],rows:[['동반차(구입/선택)/믿음카렌트','대인 무한, 대물 1억, 자손 1억, 부상 1,500만','수리비 30% (최소30만~최대100만)','고객 과실 50% 이상 시 최소10~최대50만원'],['동반차리스/믿음카리스/6&12/월렌트','상동','상동','피해 항목별 자부담 10만원']]},rules:[{icon:'🔴',text:'4대 중과실(무면허·음주·중앙선침범·신호위반) 사고 시 보험 적용 불가 + 계약 해지'},{icon:'⚠️',text:'12대 중과실 사고 시 자기부담금 외 수리비 20% 추가 발생'},{icon:'📞',text:'사고 접수: 1661-7977 (리스 상품은 1544-0114)'},{icon:'📋',text:'사고 대차 서비스는 제공되지 않습니다'},{icon:'📋',text:'긴급출동 무상 횟수: KB 10회 / 렌터카공제 5회'}]}},
+{id:17,type:'rule',title:'탁송 안내',tags:['탁송','출고','인수','탁송비'],desc:'차량 탁송 출발지, 탁송비 부담 기준, 인수 시 주의사항을 안내합니다.',detail:{rules:[{icon:'📍',text:'신차 출발지: 경기도 평택 (탁송 신청 마감: 전일 오후 3시)'},{icon:'📍',text:'중고차 출발지: 경기도 화성 또는 삼송 (탁송 신청 마감: 전일 오후 4시)'},{icon:'✅',text:'동반차·믿음카(인수형/리스): 집 앞까지 무료 (제주도는 목포까지만 무료)'},{icon:'💰',text:'6&12렌트·월렌트: 탁송비 고객 부담'},{icon:'💰',text:'무보증 상품 또는 보증금 카드 결제 시: 탁송비 고객 부담'},{icon:'⚠️',text:'차량 인수는 계약자 본인만 가능 (제3자 인수 불가)'},{icon:'⚠️',text:'탁송 당일 주소/수령인 변경 불가 — 미리 확인 필수'},{icon:'📋',text:'차량 키는 1개만 지급 (비상키는 회사 보관)'}]}},
+{id:18,type:'faq',title:'사고 관련 자주 묻는 질문',tags:['사고','FAQ','대차','미수선','과실'],desc:'사고 발생 시 고객이 가장 많이 묻는 질문과 답변 모음입니다.',detail:{scenarios:[{label:'사고 대차는 제공되나요?',scripts:[{role:'rep',text:'사고로 인한 대차 서비스는 별도로 제공되지 않습니다.',tip:''}]},{label:'수리비 현금 지급(미수선 처리)이 가능한가요?',scripts:[{role:'rep',text:'미수선 처리(수리비 현금 지급)는 불가합니다.',tip:''}]},{label:'과실은 어떻게 되나요?',scripts:[{role:'rep',text:'과실 비율은 당사 보험사와 상대 보험사의 협의 후 결정됩니다. 자세한 내용은 당사 보험사(1661-7977)에 문의해 주세요.',tip:''}]},{label:'일일 보험 가입이 가능한가요?',scripts:[{role:'rep',text:'계약된 운전자 범위 외 별도의 일일 보험 가입은 불가합니다.',tip:''}]},{label:'보험가입증명서 발급이 가능한가요?',scripts:[{role:'rep',text:'네, 이메일 주소 혹은 팩스로 보내드립니다.',tip:''}]}]}},
+{id:19,type:'faq',title:'계약 관련 자주 묻는 질문',tags:['계약','FAQ','카드결제','계약금','자동이체','무보증'],desc:'계약 진행 시 고객과 파트너가 자주 묻는 질문과 답변 모음입니다.',detail:{scenarios:[{label:'계약금 카드 결제가 가능한가요?',scripts:[{role:'rep',text:'계약금은 이체로만 받고 있어요. 잔금은 카드 결제 가능합니다. 카드 결제 희망 시 고객명·차량번호·전화번호·통신사·렌트료를 본사로 전달해 주시면 결제 문자를 발송해 드립니다.',tip:''}]},{label:'보증금 안에 계약금이 포함되어 있나요?',scripts:[{role:'rep',text:'네. 차량 배정을 위해 계약금을 받고 있기 때문에, 잔금을 내실 때는 계약금을 제외하고 입금하시면 됩니다.',tip:''}]},{label:'자동이체 방식으로 후불 진행이 가능한가요?',scripts:[{role:'rep',text:'아니요. 하모니는 선불로만 진행하고 있어요. 자동이체는 고객님이 직접 계좌에서 설정해 주셔야 합니다.',tip:''}]},{label:'무보증 상품은 어떻게 처리하나요?',scripts:[{role:'rep',text:'견적서 내에서 보증금을 0으로 바꿔 진행하면 됩니다. 그러면 자동으로 렌트료는 인상된 금액으로 반영됩니다.',tip:''}]}]}},
+{id:20,type:'faq',title:'차량 종류 & 연료 타입 안내',tags:['차종','연료','SUV','승용차','하이브리드','전기차'],desc:'승용차·SUV·MPV·화물차의 특징과 가솔린·디젤·하이브리드·전기차 비교 안내입니다.',detail:{table:{headers:['차종','특징','추천 고객'],rows:[['승용차(세단/해치백)','연비·유지비 경제적, 도심 주행 유리','출퇴근, 연비 중시 고객'],['SUV','시야 높아 편안, 트렁크 넓음','가족, 레저, 캠핑 즐기는 고객'],['MPV(카니발/스타리아)','최대 9인 탑승, 좌석 배열 가변','대가족, 넓은 공간 원하는 고객'],['화물차(포터/봉고)','넓은 적재 공간, 상용 특화','업무용, 주행거리 긴 사업자']]},rules:[{icon:'📋',text:'가솔린: 조용하고 관리 쉬움. 도심 위주, 첫 차 추천'},{icon:'📋',text:'디젤: 토크 좋고 연비 우수. 장거리, 대형 SUV 추천'},{icon:'📋',text:'하이브리드(HEV): 연비 최고, 충전 인프라 부담 없음. 도심 주행 많은 분 추천'},{icon:'📋',text:'전기차(EV): 연료비 거의 없음. 집/회사 충전 가능한 분 추천'}]}},
+{id:21,type:'process',title:'계약 전체 흐름 (12단계)',tags:['계약흐름','프로세스','견적','탁송','해피콜'],desc:'상담부터 차량 인도까지 하모니렌트카 계약의 전체 12단계 흐름입니다.',detail:{rules:[{icon:'①',text:'견적 내기 — 파트너즈 사이트에서 차량 선택 및 견적 저장'},{icon:'②',text:'신청서 발송 — 저장견적 메뉴에서 고객에게 신청서 링크 발송'},{icon:'③',text:'계약금 입금 — 고객 신청서 작성 완료 후 가상계좌 자동 발급 (24시간 내 입금)'},{icon:'④',text:'계약정보 확인 — 바로시스템 사전확인 메뉴에서 고객정보·서류 검토'},{icon:'⑤',text:'자사 확인 — 바로시스템에서 사전확인 승인 처리'},{icon:'⑥',text:'계약상태 업데이트 — 계약진행조회 메뉴 확인'},{icon:'⑦',text:'계약서 발송 — 파트너즈 진행상태조회에서 고객에게 계약서 링크 발송'},{icon:'⑧',text:'잔금 입금 — 고객이 가상계좌로 잔금 납부 (계약금 입금일 포함 3일차 오후 6시까지)'},{icon:'⑨',text:'탁송 요청 — 파트너즈에서 날짜·방법·출발/도착지 입력 후 요청'},{icon:'⑩',text:'승인 대기 — 본사에서 해피콜 진행 (02-1588-5802, 반드시 받아야 출고)'},{icon:'⑪',text:'차량 인도 — 탁송 기사 운전해 고객 전달, 인수증 서명'},{icon:'⑫',text:'계약 완료 — 자사 최종 실행 처리 완료'}]}},
+{id:22,type:'process',title:'필수 서류 체크리스트',tags:['서류','주민등록','면허증','법인','사업자'],desc:'상품과 고객 유형별 필요 서류를 정리한 체크리스트입니다.',detail:{table:{headers:['상품','공통','개인 추가','개인사업자 추가','법인 추가'],rows:[['동반차/인수형/리스','운전면허증','주민등록등본','사업자등록증','대표자서류+법인서류 전체'],['믿음카/믿음카리스','운전면허증','-','사업자등록증','법인인감+대표인감'],['6&12렌트','운전면허증','-','사업자등록증','법인인감+대표인감'],['월렌트','운전면허증','-','사업자등록증','-'],['무보증','운전면허증','건강보험자격확인서+납입확인서','-','-']]},rules:[{icon:'📋',text:'법인 서류: 사업자등록증, 법인등기부등본, 법인인감증명서, 재무제표, 주주명부'},{icon:'📋',text:'주민등록등본: 개인·개인사업자·법인 모두 발급일 1개월 이내'}]}},
+{id:23,type:'process',title:'바로시스템 & 파트너즈 안내',tags:['바로시스템','파트너즈','ERP','전산'],desc:'영업에 필요한 두 가지 전산 시스템의 주요 메뉴와 사용법을 안내합니다.',detail:{rules:[{icon:'🖥',text:'바로시스템 주소: 101.101.218.134:8080 (구글/엣지 주소창에 입력)'},{icon:'🖥',text:'파트너즈 사이트: https://harmonypartners.kr/'},{icon:'📋',text:'바로시스템: 고객관리 > 계약고객관리, 블랙컨슈머관리'},{icon:'📋',text:'바로시스템: 차량관리 > 차량현황판, 차종현황판, 차량사진'},{icon:'📋',text:'바로시스템: 계약관리 > 사전확인, 계약진행조회, 탁송관리'},{icon:'📋',text:'파트너즈: 견적내기, 즉시출고신차/중고, 입고예정, 공지사항, 저장견적, 진행상태조회'},{icon:'⚠️',text:'신청서 보내기는 반드시 저장견적 메뉴에서만 가능합니다'},{icon:'⚠️',text:'신청서 발송 완료 문구가 뜰 때까지 기다리세요 — 중복 발송 주의'}]}}
+];
+let currentFilter='all',activeTag='';
+function allTags(){return[...new Set(DATA.flatMap(d=>d.tags))]}
+function setFilter(f,el){currentFilter=f;activeTag='';document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));el.classList.add('active');document.querySelectorAll('.tag-chip').forEach(c=>c.classList.remove('active'));render()}
+function setTag(tag){activeTag=activeTag===tag?'':tag;currentFilter='all';document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));document.querySelector('[data-filter="all"]').classList.add('active');document.querySelectorAll('.tag-chip').forEach(c=>c.classList.toggle('active',c.dataset.tag===activeTag));render()}
+function clearSearch(){document.getElementById('search').value='';document.getElementById('clear-btn').style.display='none';render()}
+function getFiltered(){const q=document.getElementById('search').value.trim().toLowerCase();document.getElementById('clear-btn').style.display=q?'flex':'none';return DATA.filter(d=>{const tOk=currentFilter==='all'||d.type===currentFilter;const gOk=!activeTag||d.tags.includes(activeTag);const qOk=!q||d.title.toLowerCase().includes(q)||d.desc.toLowerCase().includes(q)||d.tags.some(t=>t.includes(q));return tOk&&gOk&&qOk})}
+const TL={script:'응대 스크립트',product:'상품 안내',rule:'필수 규정',faq:'자주 묻는 질문',process:'계약 프로세스'};
+const TC={script:'badge-script',product:'badge-product',rule:'badge-rule',faq:'badge-faq',process:'badge-process'};
+function render(){const list=getFiltered();document.getElementById('results-count').innerHTML=`<span>${list.length}</span>개 항목`;['all','script','product','rule','faq','process'].forEach(k=>{const el=document.getElementById('fc-'+k);if(el)el.textContent=k==='all'?DATA.length:DATA.filter(d=>d.type===k).length});document.getElementById('total-count').textContent=DATA.length+' items';const cards=document.getElementById('cards');if(!list.length){cards.innerHTML='<div class="empty"><div class="empty-icon">🔍</div><h3>검색 결과가 없습니다</h3><p>다른 키워드나 태그로 검색해 보세요.</p></div>';return}cards.innerHTML=list.map(d=>`<div class="card" onclick="openDetail(${d.id})"><div class="card-head"><div class="card-title">${d.title}</div><span class="badge ${TC[d.type]}">${TL[d.type]}</span></div><div class="card-desc">${d.desc}</div><div class="card-tags">${d.tags.map(t=>`<span class="ctag">#${t}</span>`).join('')}</div><div class="card-actions"><button class="btn btn-primary" onclick="event.stopPropagation();openDetail(${d.id})">자세히 보기 →</button></div></div>`).join('')}
+function buildTagCloud(){const cloud=document.getElementById('tag-cloud');allTags().forEach(t=>{const el=document.createElement('button');el.className='tag-chip';el.dataset.tag=t;el.textContent='#'+t;el.onclick=()=>setTag(t);cloud.appendChild(el)})}
+function openDetail(id){const d=DATA.find(x=>x.id===id);if(!d)return;const content=document.getElementById('detail-content');let html=`<div style="clear:both;padding-top:4px"></div><span class="badge detail-badge ${TC[d.type]}">${TL[d.type]}</span><div class="detail-title">${d.title}</div><div class="detail-desc">${d.desc}</div>`;if(d.detail.scenarios){d.detail.scenarios.forEach(s=>{html+=`<div class="detail-section"><div class="detail-section-label">${s.label}</div>`;s.scripts.forEach(sc=>{html+=`<div class="script-block"><div class="script-role ${sc.role==='cust'?'cust':''}">${sc.role==='rep'?'▶ 영업담당자':'고객'}</div><div class="script-text">${sc.text}</div>${sc.tip?`<div class="script-tip">💡 ${sc.tip}</div>`:''}</div>`});html+='</div>'})}if(d.detail.table){html+=`<div class="detail-section"><div class="detail-section-label">기준표</div><table class="detail-table"><tr>${d.detail.table.headers.map(h=>`<th>${h}</th>`).join('')}</tr>${d.detail.table.rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</table></div>`}if(d.detail.rules){html+=`<div class="detail-section"><div class="detail-section-label">상세 안내</div>`;d.detail.rules.forEach(r=>{html+=`<div class="rule-item"><span class="rule-icon">${r.icon}</span><span>${r.text}</span></div>`});html+='</div>'}content.innerHTML=html;document.getElementById('overlay').classList.add('open')}
+function closeDetail(e){if(e.target===document.getElementById('overlay'))closeDetailBtn()}
+function closeDetailBtn(){document.getElementById('overlay').classList.remove('open')}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDetailBtn()});
+buildTagCloud();render();
+</script>
+</body>
+</html>
