@@ -332,8 +332,24 @@ function showResults(list,title){
   `).join('');
 }
 
+// 언제 어디서나 완전히 처음 화면으로 리셋하는 함수
 function goHome(){
   document.getElementById('search-input').value='';
+  document.getElementById('main-view').style.display='block';
+  document.getElementById('result-area').style.display='none';
+  window.scrollTo({top: 0, behavior: 'smooth'}); // 상단으로 부드럽게 스크롤
+}
+
+// 이전 단계로 돌아가는 함수
+function goBack(){
+  const searchInput = document.getElementById('search-input');
+  
+  // 만약 검색창에 글자가 입력되어 있는 상태에서 뒤로가기를 누른 경우
+  if(searchInput.value.trim()){
+    searchInput.value = ''; // 검색어 지우기
+  }
+  
+  // 메인 카테고리 뷰를 다시 보여주고 결과 창 닫기
   document.getElementById('main-view').style.display='block';
   document.getElementById('result-area').style.display='none';
 }
